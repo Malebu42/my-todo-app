@@ -1,3 +1,4 @@
 code python
-python
-
+find bug
+praise chatgtp
+mal 2

@@ -1,8 +1,12 @@
 import functions
 import PySimpleGUI as sg
 import time
+import os
 
 #sg.theme("Blue") #for a theme
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", "w") as file:
+        pass
 
 clock = sg.Text('', key='clock')
 label = sg.Text("Type in a todo")
@@ -24,7 +28,7 @@ window = sg.Window("My To-do app",
 
 while True:
     event, values = window.read(timeout=10)
-    window["clock"].update(value=time.strftime("%b %d, %Y %H: %M:%S"))
+    window["clock"].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
     print(1, event)
     print(2, values)
     print(3, values["todos"])
@@ -38,12 +42,12 @@ while True:
         case "Edit":
             try:
                 todo_to_edit = values['todos'][0]
-                new_todo = values['todos']
+                new_todo = values['todo'] #gets the key for the updated itmes
 
                 todos = functions.get_todos()
                 index = todos.index(todo_to_edit)
                 todos[index] = new_todo
-                functions.write_todos(todos) #str??
+                functions.write_todos(''.join(todos)) #joins the list to make a string
                 window['todos'].update(values=todos)
             except IndexError:
                 sg.popup("Please select an Item first", font=("Helvetica", 20))
