@@ -1,3 +1,2 @@
-code python
-find bug
-praise chatgtp
+write python code
+debug
